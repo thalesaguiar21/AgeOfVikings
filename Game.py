@@ -26,7 +26,9 @@ class Game(object):
         print("") 
 
 	def printTutorial(self):
-		pass
+		print('1. Este é um jogo baseado em texto, digite os comandos disponíveis para jogar.')
+		print('2. Alguns comandos precisam de um complemento e outros não.')
+		print('3. Digite apenas um comando por vez.')
 
 	def printWelcome(self):
 		printLogo()
@@ -40,7 +42,15 @@ class Game(object):
 			pass
 		elif(command.getFirstWord() == 'olhar'):
 			executarOlhar(command)
-			
+		elif(command.getFirstWord() == 'voltar'):
+			executarVoltar(command)
+		elif(command.getFirstWord() == 'ajuda'):
+			executarAjuda(command)
+		elif(command.getFirstWord() == 'atacar'):
+			executarAtacar(command)
+		elif(command.getFirstWord() == 'defender'):
+			executarDefender(command)
+
 
 		
 
