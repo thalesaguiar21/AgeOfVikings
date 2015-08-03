@@ -9,21 +9,40 @@ class Game(object):
 		self.rooms = []
 		self.createWorld()
 		self.actualRoom = rooms[0]
+		self.lastRoom = room[0]
 
 	def createWorld(self):
 		pass
 
 	def printLogo(self):
-		pass
+		print("  _      __     _    _")
+        print(" | |    / / _  | |  / / _   _   _   _____     ______")
+        print(" | |   / / | | | | / / | | | \ | | |  _  |   /  ____|")
+        print(" | |  / /  | | | |/ /  | | |  \| | | |_| |  /  /__")
+        print(" | | / /   | | |   /   | | |     | |___  |  \___  \ ")
+        print(" | |/ /    | | |   \   | | |     |     | |      \  \ ")
+        print(" |   /     | | | |\ \  | | | |\  |  ___| |  ____/  /")
+        print(" |__/      |_| |_| \_\ |_| |_| \_| |_____| |______/ ") 
+        print("") 
 
 	def printTutorial(self):
 		pass
 
 	def printWelcome(self):
-		pass
+		printLogo()
+		printTutorial()
+		print(self.actualRoom.getFullDescription() + '\n')
 
 	def selectCommand(self, command):
-		pass
+		if(command.getFirstWord() == 'ir'):
+			executarIr(command)
+		elif(command.getFirstWord() == 'pegar'):
+			pass
+		elif(command.getFirstWord() == 'olhar'):
+			executarOlhar(command)
+			
+
+		
 
 	def play():
 		pass
