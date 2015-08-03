@@ -5,6 +5,9 @@ class Command(object):
 		self.firstWord = firstWord
 		self.secondWord = secondWord
 
+	def setSecondWord(self, secondWord):
+		self.secondWord = secondWord
+
 	def getFirstWord(self):
 		return self.firstWord
 
@@ -12,6 +15,6 @@ class Command(object):
 		return self.secondWord
 
 	def hasSecondWord(self):
-		if self.secondWord == None
+		if(self.secondWord == None):
 			return False
 		return True

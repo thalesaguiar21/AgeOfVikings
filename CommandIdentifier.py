@@ -1,5 +1,5 @@
 from Command import *
-from commandList import *
+from CommandList import *
 
 class CommandIdentifier(object):
 	''' Identifica e trata o comando digitado pelo usuário '''
@@ -8,18 +8,26 @@ class CommandIdentifier(object):
 		self.words = []
 		self.lineInput = ''
 		self.command = None
-		self.commandList = commandList()
+		self.commandList = CommandList()
 
-	def idCommand(self, lineInput):
+	def idCommand(self):
 		self.lineInput = input(str("O que você faz? "))
-		self.words = lineInput.lower().lstrip().split(' ', 1)
-		if(commandList.isValid(self.words[0])):
+		self.words = self.lineInput.lower().lstrip().split(' ', 1)
+		if(self.commandList.isValid(self.words[0])):
 			if (len(self.words) == 2):
-				command = Command(self.words[0], self.words[1])
-				return command
+				self.command = Command(self.words[0], self.words[1])
+				return self.command
 			elif(len(self.words) == 1):
-				command = Command(self.words[0], None)
-				return command
+				self.command = Command(self.words[0], None)
+				return self.command
 		else:
-			print('Este não é um comando válido! Tente novamente')
 			return None
+
+	def getCommands(self):
+		return self.commandList.getCommands()
+
+	def getCommandsString(self):
+		commandString = ''
+		for command in self.commandList:
+			commandString += ' ' + command
+		return 'Comandos: ' + commandString
