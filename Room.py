@@ -4,14 +4,22 @@ class Room(object):
 
 	''' Classe que define uma sala dentro do jogo '''
 
-	def __init__(self, name, description):
+	def __init__(self, name, description1):
 		self.name = name
-		self.description = description
+		self.description1 = description1
+		self.description2 = ''
+		self.visited = False
 		self.exits = {}
 		self.items = {}
 
-	def addItem(self, name, item):
-		self.items[name] = item
+	def setDescription2(self, description2):
+		self.description2 = description2
+
+	def setVisited(self):
+		self.visited = True
+
+	def addItem(self, item):
+		self.items[item.getName()] = item
 
 	def rmItem(self, name):
 		del self.items[name]
@@ -34,13 +42,15 @@ class Room(object):
 		return self.items.keys()
 
 	def getDescription(self):
-		return self.description
+		if(not self.visited):
+			return self.description1
+		return self.description2
 
 	def getName(self):
 		return self.name
 
 	def getFullDescription(self):
-		return 'Você está nos(as)/no(a) ' + self.name + ', ' + self.description
+		return 'Você está nos(as)/no(a) ' + self.name + ', ' + self.getDescription()
 
 	def setExits(self, exit, room):
 		self.exits[exit] = room
@@ -58,7 +68,6 @@ class Room(object):
 		for exit in self.exits:
 			exitString += exit + ' '
 		return 'Saídas: ' + exitString
-
 
 	def goExit(self, exit):
 		return self.exits[exit]

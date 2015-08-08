@@ -2,6 +2,7 @@ from Command import *
 from CommandList import *
 
 class CommandIdentifier(object):
+	
 	''' Identifica e trata o comando digitado pelo usuário '''
 
 	def __init__(self):
@@ -28,6 +29,6 @@ class CommandIdentifier(object):
 
 	def getCommandsString(self):
 		commandString = ''
-		for command in self.commandList:
+		for command in self.commandList.getCommandList():
 			commandString += ' ' + command
 		return 'Comandos: ' + commandString

@@ -1,9 +1,11 @@
 class Command(object):
 
 	''' Classe que define um comando do jogo '''
-	def __init__(self, firstWord, secondWord):
+	
+	def __init__(self, firstWord, secondWord, binary = True):
 		self.firstWord = firstWord
 		self.secondWord = secondWord
+		self.binary = binary
 
 	def setSecondWord(self, secondWord):
 		self.secondWord = secondWord

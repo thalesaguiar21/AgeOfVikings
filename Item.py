@@ -7,17 +7,9 @@ class Item(object):
 		self.collectable = collectable
 		self.name = name
 		self.description = description
-		self.items = []
 
 	def isCollectable(self):
 		return self.collectable
-
-	def addItems(self, item):
-		self.items.append(item)
-
-	def rmItems(self, itemName):
-		rmIndex = self.items.index(itemName)
-		self.items.remove(rmIndex)
 
 	def getName(self):
 		return self.name
