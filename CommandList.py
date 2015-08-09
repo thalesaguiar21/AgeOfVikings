@@ -3,7 +3,10 @@ class CommandList(object):
 	''' Classe que possui todos os comandos possíveis do jogo '''
 
 	def __init__(self):
-		self.commandList = ['ir', 'voltar', 'olhar', 'pegar', 'ajuda', 'atacar', 'defender', 'sair']
+		self.commandList = ['ir', 'voltar', 'olhar', 'pegar', 'ajuda', 'atacar', 'defender', 'sair' /
+							'usar']
+
+		print('uehuehueue')
 
 	def getCommandList(self):
 		return self.commandList
