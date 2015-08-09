@@ -1,6 +1,7 @@
 # EraDosVikings2
 
 How to execute the game?
+
 1. Make sure you have Python 3.x installed in your PC.
 
   1.1 If you don't have it, then:
@@ -17,6 +18,7 @@ This game is being developed to be presented at CIENTEC (Week of science, tecnol
 -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 Como executar o jogo?
+
 1. Certifique-se de que você tem Python 3.x instalado em seu PC.
 
   1.1 Se você não tem isso, então:
