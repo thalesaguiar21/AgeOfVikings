@@ -5,10 +5,10 @@ class CommandList(object):
 	def __init__(self):
 		self.commandListSinonimous = {'ir' : ['ir', 'vou', 'irei'], \
 									  'olhar' : ['olhar', 'ver', 'inspecionar', 'verificar', 'observar'], \
-									  'ajuda' : ['ajuda', 'socorro'], \
+									  'ajuda' : ['ajuda', 'socorro', 'help'], \
 									  'sair' : ['sair', 'desistir', 'abandonar', 'terminar'], \
-									  'voltar' : ['voltar', 'retornar'], \
-									  'pegar' : ['pegar', 'apanhar', 'coletar', 'recolher'], \
+									  #'voltar' : ['voltar', 'retornar'], \
+									  'pegar' : ['pegar', 'apanhar', 'coletar', 'recolher', 'envie telepaticamente'], \
 									  'atacar' : ['atacar', 'bater'], \
 									  'defender' : ['defender', 'bloquear']}
 
@@ -19,11 +19,8 @@ class CommandList(object):
 		oneWordCommands = []
 		oneWordCommands.extend(self.commandListSinonimous.get('sair')[:])
 		oneWordCommands.extend(self.commandListSinonimous.get('ajuda')[:])
-		oneWordCommands.extend(self.commandListSinonimous.get('voltar')[:])
+		#oneWordCommands.extend(self.commandListSinonimous.get('voltar')[:])
 		return oneWordCommands
-
-	def isValid(self, command):
-		return (command in self.commandList)
 
 	def isValid2(self, command):
 		for key in self.commandListSinonimous.keys():

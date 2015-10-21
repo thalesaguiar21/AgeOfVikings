@@ -27,8 +27,8 @@ class Room(object):
 	def listItems(self):
 		itemList = ''
 		for item in self.items:
-			itemList += ' ' + str(item)
-		return 'Itens: ' + itemList
+			itemList += ' | ' + str(item)
+		return 'Itens: ' + itemList + ' |'
 
 	def hasItems(self):
 		if(len(self.items.keys()) == 0):
@@ -69,8 +69,8 @@ class Room(object):
 	def getExitString(self):
 		exitString = ''
 		for exit in self.exits:
-			exitString += exit + ' '
-		return 'Saídas: ' + exitString
+			exitString += ' | ' + exit
+		return 'Saídas: ' + exitString + ' |'
 
 	def goExit(self, exit):
 		return self.exits[exit]

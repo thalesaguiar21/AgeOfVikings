@@ -17,6 +17,7 @@ class CommandIdentifier(object):
 		self.words[0] = self.commandList.isValid2(self.words[0])
 		if(self.words[0] != None):
 			if (len(self.words) == 2):
+				self.words[1].lower().lstrip()
 				self.command = Command(self.words[0], self.words[1])
 				return self.command
 			elif(len(self.words) == 1):
