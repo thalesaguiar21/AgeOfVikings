@@ -8,10 +8,9 @@ class CommandList(object):
 									  'ajuda' : ['ajuda', 'socorro'], \
 									  'sair' : ['sair', 'desistir', 'abandonar', 'terminar'], \
 									  'voltar' : ['voltar', 'retornar'], \
-									  'pegar' : ['pegar', 'apanhar', 'coletar'], \
+									  'pegar' : ['pegar', 'apanhar', 'coletar', 'recolher'], \
 									  'atacar' : ['atacar', 'bater'], \
 									  'defender' : ['defender', 'bloquear']}
-		#self.commandList = ['ir', 'voltar', 'olhar', 'pegar', 'ajuda', 'atacar', 'defender', 'sair']
 
 	def getCommandList(self):
 		return self.commandListSinonimous.keys()
@@ -21,7 +20,7 @@ class CommandList(object):
 		oneWordCommands.extend(self.commandListSinonimous.get('sair')[:])
 		oneWordCommands.extend(self.commandListSinonimous.get('ajuda')[:])
 		oneWordCommands.extend(self.commandListSinonimous.get('voltar')[:])
-		return self.oneWordCommands
+		return oneWordCommands
 
 	def isValid(self, command):
 		return (command in self.commandList)
@@ -34,8 +33,3 @@ class CommandList(object):
 
 	def getCommand(self, command):
 		return self.commandListSinonimous[command]
-'''
-Teste = CommandList()
-print(Teste.isValid2("vou"))
-print(Teste.isValid2("pirueta"))
-'''

@@ -63,6 +63,9 @@ class Room(object):
 	def getExits(self):
 		return self.exits.keys()
 
+	def getExitsDict(self):
+		return self.exits
+
 	def getExitString(self):
 		exitString = ''
 		for exit in self.exits:

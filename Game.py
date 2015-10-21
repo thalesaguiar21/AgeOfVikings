@@ -10,7 +10,6 @@ class Game(object):
 
 	def __init__(self):
 		self.commandId = CommandIdentifier()
-		#self.rooms = 
 		self.actualRoom = None
 		self.lastRoom = None
 		self.bag = []
@@ -41,6 +40,7 @@ class Game(object):
 		salaMisteriosa.setExits('correr', cabana)
 
 		cabana.setExits('porta', cozinha)
+		cabana.setExits('cama', cama)
 
 		cozinha.setExits('porta', cabana)
 		cozinha.setExits('dispensa', dispensa)
@@ -57,18 +57,15 @@ class Game(object):
 		#Criando itens
 		bilhete = Item('bilhete', ' "Encontre-me nas ruinas do antigo rei,\nDe: Seu amigo\nPara: Sieg"')
 		roupas = Item('roupas', 'Roupas de couro de animais das redondezas, protegem bastante contra o frio')
-		cama = Item('cama', 'Cama de feno e pedaços de pele de animais. Muito usadas nesses tempos...')
 		machado = Item('machado', 'Um machado comum')
 		escudo = Item('escudo', 'Escudo de madeira feito pelo seu pai.')
 		frutas = Item('frutas', 'algumas frutas que sobraram antes do início do inverno.')
-		simboloDeCaçada = Item('Troféu', 'A cabeça de um javali morto na sua primeira caçada com seu pai. Olhar ela lhe traz lembranças de sua infância... De quando você ainda estava aprendendo a segurar seu escudo.')
-
-		#Adicionando itens aos itens '-'
+		simboloDeCaçada = Item('Troféu', 'A cabeça de um javali morto na sua primeira caçada com seu pai. Olhar ela lhe traz lembranças de sua infância...'\
+			+ ' De quando você ainda estava aprendendo a segurar seu escudo.')
 		
 
 		#Adicionando itens as salas
 		cabana.addItem(roupas)
-		cabana.addItem(cama)
 		cabana.addItem(machado)
 		cabana.addItem(escudo)
 
@@ -113,7 +110,7 @@ class Game(object):
 			print('Este não é um comando válido!')
 			return True
 
-		elif(not command.hasSecondWord() and command.getFirstWord() not in commandId.getOneWords()):
+		elif(not command.hasSecondWord() and command.getFirstWord() not in self.commandId.getOneWords()):
 			secondWord = None
 			while(secondWord == None):
 				secondWord = input(command.getFirstWord().capitalize() + '... ?')
@@ -146,13 +143,14 @@ class Game(object):
 
 	def executarIr(self, command):
 		if(command.getSecondWord() in self.actualRoom.getExits()):
-			
 			self.lastRoom = command.getSecondWord()
 			self.actualRoom = self.actualRoom.goExit(command.getSecondWord())
-			#self.printRoomInfo()
-			#self.actualRoom.setVisited()
 			os.system('CLS')
 			#os.system('clear')
+			self.printWelcome()
+			print('')
+			self.printRoomInfo()
+			self.actualRoom.setVisited()
 		else:
 			print('Esta saída não existe!')
 		return True
@@ -178,10 +176,15 @@ class Game(object):
 		return True
 
 	def executarVoltar(self, command):
-		aux = self.actualRoom
-		self.actualRoom = self.lastRoom
-		self.lastRoom = aux
-		#self.printRoomInfo()
+		if(self.lastRoom != None):
+			if(lastRoom in actualRoom.getExitisDict().values()):
+				aux = self.actualRoom
+				self.actualRoom = self.lastRoom
+				self.lastRoom = aux
+				self.printLogo
+				self.printRoomInfo()
+		else:
+			print('Não há salas para voltar =\'(')
 		return True
 
 	def executarAjuda(self, command):
@@ -205,13 +208,19 @@ class Game(object):
 		playing = True
 		self.printWelcome()
 		print('')
+		self.printRoomInfo()
+		print('')
 		while(playing == True):
-			self.printRoomInfo()
-			print('')
 			command = self.commandId.idCommand()
 			print('')
 			playing = self.selectCommand(command)
 
-
-eraDosVikings = Game()
-eraDosVikings.play()
+keepPlaying = 1
+while(keepPlaying == 1):
+	os.system('CLS')
+	#os.system('clear')
+	eraDosVikings = Game()
+	eraDosVikings.play()
+	print('Pressione uma tecla para jogar novamente: ')
+	input()
+print('Nos encontraremos em Valhala, nobre guerreiro')
