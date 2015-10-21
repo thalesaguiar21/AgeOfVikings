@@ -14,7 +14,8 @@ class CommandIdentifier(object):
 	def idCommand(self):
 		self.lineInput = input(str("O que você faz? "))
 		self.words = self.lineInput.lower().lstrip().split(' ', 1)
-		if(self.commandList.isValid(self.words[0])):
+		self.words[0] = self.commandList.isValid2(self.words[0])
+		if(self.words[0] != None):
 			if (len(self.words) == 2):
 				self.command = Command(self.words[0], self.words[1])
 				return self.command
@@ -25,10 +26,13 @@ class CommandIdentifier(object):
 			return None
 
 	def getCommands(self):
-		return self.commandList.getCommands()
+		return self.commandList.getCommandList()
 
 	def getCommandsString(self):
 		commandString = ''
 		for command in self.commandList.getCommandList():
 			commandString += ' ' + command
-		return 'Comandos: ' + commandString
+		return 'Comandos disponíveis: ' + commandString
+
+	def getOneWords(self):
+		return self.commandList.getOneWordCommands()

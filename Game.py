@@ -2,6 +2,7 @@ from CommandIdentifier import *
 from Command import *
 from CommandList import *
 from Room import *
+import os
 
 class Game(object):
 
@@ -9,31 +10,52 @@ class Game(object):
 
 	def __init__(self):
 		self.commandId = CommandIdentifier()
-		self.rooms = []
-		self.actualRoom = ''
-		self.lastRoom = []
+		#self.rooms = 
+		self.actualRoom = None
+		self.lastRoom = None
 		self.bag = []
 		self.createWorld()
 
 	def createWorld(self):
 		#Criando as salas...
-		salaMisteriosa = Room('sala misteriosa', 'Você abre os olhos devagar, sua visão ainda embaçada consegue identificar que você encontra-se em um salão tão brilhante quanto ouro. Ao seu lado você percebe uma silhueta de um homem vestido em uma armadura e segurando o que parece ser uma lança... Ele dirigi-se à você...')
-		cabana = Room('cabana', 'Você acorda assustado e suando. Olha ao redor e encontra suas roupas penduradas na parede, sua cama e seu machado e escudo pendurados na parde de madeira, logo ao lado uma porta... Você então se dá conta de que está em sua cabana e que tudo não passou de um sonho.')
-		cozinha = Room('cozinha', 'Entrando na cozinha, você já está familiarizado com sua velha dispensa, sua pequena mesa com o que restou da caça de ontem. Além disso, a parte mais importante, seu trófeu da primeira caçada ao lado de seu pai.')
+		salaMisteriosa = Room('sala misteriosa', 'Você abre os olhos devagar, sua visão ainda embaçada consegue identificar que'\
+			+ ' você encontra-se em um salão tão brilhante quanto ouro. Ao seu lado você percebe uma silhueta de um homem vestido em uma'\
+			+ ' armadura e segurando o que parece ser uma lança... Ele dirigi-se à você...')
+		cabana = Room('cabana', 'Você acorda assustado e suando. Olha ao redor e encontra suas roupas penduradas na parede, sua cama'\
+			+ ' e seu machado e escudo pendurados na parde de madeira, logo ao lado uma porta... Você então se dá conta de que'\
+			+ ' está em sua cabana e que tudo não passou de um sonho.')
+		cozinha = Room('cozinha', 'Entrando na cozinha, você já está familiarizado com sua velha dispensa, sua pequena mesa  e sobre ela o'\
+			+ ' que restou da caça de ontem e uma pequena runa. Além disso, a parte mais importante, seu trófeu da primeira caçada ao lado'\
+			+ ' de seu pai.')
 		dispensa = Room('dispensa', 'um armário antigo com algumas frutas')
 		cama = Room('cama', 'cama de feno e pedaços de pele de animais. Muito usada nesses tempos...')
+		arredoresDeSiegheim1 = Room('arredores de Siegheim', 'Ao sair da sua cabana, você se encontra nas florestas que rodeiam as ruinas de'\
+			+ ' Siegheim(nome da cidade principal dos dominios do rei ragnar)')
+		#arredoresDeSiegheim2 = Room('arredores de Siegheim', 'andando pelo caminho, você lembra dos passeios com seu pai por essas mesmas florestas')
+
 
 		#Adicionando as segundas descrições
 		cabana.setDescription2('Seu quarto, nele você pode ver sua cama e algumas coisas comuns')
 
 		#Adicionando saídas as salas
 		salaMisteriosa.setExits('correr', cabana)
+
 		cabana.setExits('porta', cozinha)
+
 		cozinha.setExits('porta', cabana)
+		cozinha.setExits('dispensa', dispensa)
+		cozinha.setExits('fora da cabana', arredoresDeSiegheim1)
+
 		dispensa.setExits('cozinha', cozinha)
+
 		cama.setExits('cabana', cabana)
+
+		arredoresDeSiegheim1.setExits('cabana', cozinha)
+		#arredoresDeSiegheim1.setExits('frente', arredoresDeSiegheim2)
+
 		
 		#Criando itens
+		bilhete = Item('bilhete', ' "Encontre-me nas ruinas do antigo rei,\nDe: Seu amigo\nPara: Sieg"')
 		roupas = Item('roupas', 'Roupas de couro de animais das redondezas, protegem bastante contra o frio')
 		cama = Item('cama', 'Cama de feno e pedaços de pele de animais. Muito usadas nesses tempos...')
 		machado = Item('machado', 'Um machado comum')
@@ -51,6 +73,7 @@ class Game(object):
 		cabana.addItem(escudo)
 
 		cozinha.addItem(simboloDeCaçada)
+		cozinha.addItem(bilhete)
 
 		dispensa.addItem(frutas)
 
@@ -71,6 +94,7 @@ class Game(object):
 		print('1. Este é um jogo baseado em texto, digite os comandos disponíveis para jogar.')
 		print('2. Alguns comandos precisam de um complemento e outros não.')
 		print('3. Digite apenas um comando por vez.')
+		print('4. Caso esteja perdido digite \'ajuda\'')
 
 	def printWelcome(self):
 		self.printLogo()
@@ -89,7 +113,7 @@ class Game(object):
 			print('Este não é um comando válido!')
 			return True
 
-		elif(not command.hasSecondWord() and command.getFirstWord() not in ['sair', 'ajuda']):
+		elif(not command.hasSecondWord() and command.getFirstWord() not in commandId.getOneWords()):
 			secondWord = None
 			while(secondWord == None):
 				secondWord = input(command.getFirstWord().capitalize() + '... ?')
@@ -122,10 +146,13 @@ class Game(object):
 
 	def executarIr(self, command):
 		if(command.getSecondWord() in self.actualRoom.getExits()):
+			
 			self.lastRoom = command.getSecondWord()
 			self.actualRoom = self.actualRoom.goExit(command.getSecondWord())
-			self.printRoomInfo()
-			self.actualRoom.setVisited()
+			#self.printRoomInfo()
+			#self.actualRoom.setVisited()
+			os.system('CLS')
+			#os.system('clear')
 		else:
 			print('Esta saída não existe!')
 		return True
@@ -154,7 +181,7 @@ class Game(object):
 		aux = self.actualRoom
 		self.actualRoom = self.lastRoom
 		self.lastRoom = aux
-		self.printRoomInfo()
+		#self.printRoomInfo()
 		return True
 
 	def executarAjuda(self, command):
@@ -177,12 +204,14 @@ class Game(object):
 	def play(self):
 		playing = True
 		self.printWelcome()
-		self.printRoomInfo()
+		print('')
 		while(playing == True):
+			self.printRoomInfo()
 			print('')
 			command = self.commandId.idCommand()
 			print('')
 			playing = self.selectCommand(command)
+
 
 eraDosVikings = Game()
 eraDosVikings.play()
