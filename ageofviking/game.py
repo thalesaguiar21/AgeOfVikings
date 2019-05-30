@@ -1,7 +1,7 @@
-from CommandIdentifier import *
-from Command import *
-from CommandList import *
-from Room import *
+from command_identifier import *
+from command import *
+from command_list import *
+from room import *
 import os
 
 class Game(object):

@@ -1,4 +1,4 @@
-from Item import *
+from item import *
 
 class Room(object):
 

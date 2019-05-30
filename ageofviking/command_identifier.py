@@ -1,5 +1,5 @@
-from Command import *
-from CommandList import *
+from command import *
+from command_list import *
 
 class CommandIdentifier(object):
 	
