@@ -1,0 +1,33 @@
+>item 
+name: note
+descr: from: a dear friend\t to: sieg.\nmeet me at the old ruins.
+
+
+>item 
+name: clothes
+descr: clothes made from animal leather. 
+
+
+>item 
+name: axe
+descr: a common axe.
+
+
+>item 
+name: shield
+descr: wooden shield made by your father.
+
+
+>item 
+name: fruits
+descr: some fruits from the start of the winter.
+
+
+>item 
+name: trophy
+descr: a boars's head. looking at it brings back memories from your childhood, when you could'nt even hold your shild.
+
+
+>item
+name: green mushroom
+descr: a mushroom with healing capacities.
